@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    get "/all_products_url" => "products#all_products_action"
-    get "/first_product_url" => "products#first_product_action"
-    get "/second_product_url" => "products#second_product_action"
-    get "/last_product_url" => "products#last_product_action"
+    get "/product" => "products#index"
+    get "/product/:id" => "products#show"
   end
 end

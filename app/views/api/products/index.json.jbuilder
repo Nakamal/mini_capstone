@@ -5,5 +5,5 @@ json.array! @products.each do |product|
   json.description product.description
   json.image_url product.image_url
   json.attunement product.attunement
-  json.link "http://localhost:3000/api/product/#{product.id}"
+  json.link "http://localhost:3000/api/products/#{product.id}"
 end

@@ -14,6 +14,6 @@ json.formatted do
   json.total number_to_currency(product.total)
 end
 
-if @product.is_discounted?
+if product.is_discounted?
   json.sales_message "Yes, this item is on sale."
-endnumber_to_currency(
+end

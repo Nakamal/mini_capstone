@@ -8,6 +8,6 @@ class Product < ApplicationRecord
   end
 
   def total
-    "Your out the door cost will be a total of #{price} + #{tax}"
+    price + tax
   end
 end

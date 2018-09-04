@@ -5,8 +5,9 @@ json.tax product.tax
 json.total product.total
 json.discounted product.is_discounted?
 json.description product.description
-json.image_url product.image_url
 json.attunement product.attunement
+json.rarity product.rarity
+json.image_url product.image_url
 
 json.formatted do
   json.price number_to_currency(product.price)

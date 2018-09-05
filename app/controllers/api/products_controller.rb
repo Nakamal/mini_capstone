@@ -14,8 +14,11 @@ class Api::ProductsController < ApplicationController
                             rarity: params[:rarity],
                             image_url: params[:image_url]
                             )
-    @product.save
-    render "show.json.jbuilder"
+    if @product.save 
+      render "show.json.jbuilder"
+    else
+      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -33,8 +36,11 @@ class Api::ProductsController < ApplicationController
     @product.rarity = params[:rarity] || @product.rarity
     @product.image_url = params[:image_url] || @product.image_url
 
-    @product.save
+    if @product.save
     render "show.json.jbuilder"
+    else
+      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def destroy

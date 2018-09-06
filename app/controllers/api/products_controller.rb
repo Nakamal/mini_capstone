@@ -1,9 +1,12 @@
 class Api::ProductsController < ApplicationController
   protect_from_forgery with: :null_session
   def index
+    search_term = params[:search]
+    sort_attribute = params[:sort]
+    sort_order = params[:sort_order]
+
     @products = Product.all
 
-    search_term = params[:search]
     if search_term 
       @products = @products.where(
                                   "name iLIKE ? OR rarity iLIKE ? OR attunement iLIKE ?",
@@ -12,9 +15,6 @@ class Api::ProductsController < ApplicationController
                                   "%#{search_term}%"
                                   )
     end
-    
-    sort_attribute = params[:sort]
-    sort_order = params[:sort_order]
     
     if sort_attribute && sort_order 
       @products = @products.order(sort_attribute => sort_order)

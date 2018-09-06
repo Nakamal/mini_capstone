@@ -2,6 +2,26 @@ class Api::ProductsController < ApplicationController
   protect_from_forgery with: :null_session
   def index
     @products = Product.all
+
+    search_term = params[:search]
+    if search_term 
+      @products = @products.where(
+                                  "name iLIKE ? OR rarity iLIKE ? OR attunement iLIKE ?",
+                                  "%#{search_term}%",
+                                  "%#{search_term}%",
+                                  "%#{search_term}%"
+                                  )
+    end
+    
+    sort_attribute = params[:sort]
+    sort_order = params[:sort_order]
+    
+    if sort_attribute && sort_order 
+      @products = @products.order(sort_attribute => sort_order)
+    elsif sort_attribute
+      @products = @products.order(sort_attribute)
+    end
+
     render "index.json.jbuilder"
   end
 
@@ -37,7 +57,7 @@ class Api::ProductsController < ApplicationController
     @product.image_url = params[:image_url] || @product.image_url
 
     if @product.save
-    render "show.json.jbuilder"
+      render "show.json.jbuilder"
     else
       render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
     end

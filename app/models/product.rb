@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   validates :description, length: { maximum: 3500 }
   validates :image_url, uniqueness: true
   
-
+  belongs_to :supplier
 
   def is_discounted?
     price < 10

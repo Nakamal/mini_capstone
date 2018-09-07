@@ -15,6 +15,11 @@ json.formatted do
   json.total number_to_currency(product.total)
 end
 
+json.supplier do
+  json.partial! product.supplier, partial: 'api/suppliers/supplier', as: :supplier
+end
+
+
 if product.is_discounted?
   json.sales_message "Yes, this item is on sale."
 end

@@ -7,7 +7,10 @@ json.discounted product.is_discounted?
 json.description product.description
 json.attunement product.attunement
 json.rarity product.rarity
-json.image_url product.image_url
+
+json.images do
+  json.array! product.images, partial: 'api/images/image', as: :image
+end
 
 json.formatted do
   json.price number_to_currency(product.price)

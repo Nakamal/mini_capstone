@@ -8,6 +8,8 @@ json.description product.description
 json.attunement product.attunement
 json.rarity product.rarity
 
+json.current_user current_user
+
 json.images do
   json.array! product.images, partial: 'api/images/image', as: :image
 end

@@ -1,4 +1,4 @@
-class Api::ProductsController < ApplicationController
+ class Api::ProductsController < ApplicationController
   protect_from_forgery with: :null_session
   def index
     search_term = params[:search]

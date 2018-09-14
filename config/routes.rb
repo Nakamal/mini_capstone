@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     post "/users" => "users#create"
 
     post "/sessions" => "sessions#create"
+    
+    get "/orders" => "orders#index"
+    post "/orders" => "orders#create"
 
     get "/products" => "products#index"
     post "/products" => "products#create"

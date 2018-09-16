@@ -26,17 +26,22 @@
   end
 
   def create
-    @product = Product.new(
+    if current_user && current_user.admin
+      
+      @product = Product.new(
                             name: params[:name],
                             price: params[:price],
                             description: params[:description],
                             attunement: params[:attunement],
                             rarity: params[:rarity]
                             )
-    if @product.save 
-      render "show.json.jbuilder"
+      if @product.save 
+        render "show.json.jbuilder"
+      else
+        render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+      end
     else
-      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+      render json: {}, status: :unauthorized  
     end
   end
 

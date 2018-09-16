@@ -1,11 +1,18 @@
  class Api::ProductsController < ApplicationController
-  protect_from_forgery with: :null_session
+  before_action :authenticate_admin, except: [:index, :show]
+
   def index
     search_term = params[:search]
     sort_attribute = params[:sort]
     sort_order = params[:sort_order]
 
     @products = Product.all
+
+    category_name = params[:category]
+    if category_name
+      category = Category.find_by(name: category_name)
+      @products = category.products
+    end
 
     if search_term 
       @products = @products.where(

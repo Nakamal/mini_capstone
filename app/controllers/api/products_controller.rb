@@ -1,5 +1,5 @@
  class Api::ProductsController < ApplicationController
-  before_action :authenticate_admin, except: [:index, :show]
+  # before_action :authenticate_admin, except: [:index, :show]
 
   def index
     search_term = params[:search]

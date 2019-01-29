@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-  helper_method :current_user
+  helper_method :current_user 
 
   # def authenticate_user
   #   unless current_user
